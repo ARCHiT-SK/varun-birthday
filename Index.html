@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Varun Bhai! 🎂</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- DESI BOYS THEME --- */
+        :root {
+            --orange-main: #ff9800;
+            --yellow-accent: #ffd700;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text-light: #f5f5f5;
+        }
+
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0; padding: 0;
+            background: linear-gradient(135deg, #121212 0%, #2c2c2c 100%);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- START SCREEN --- */
+        #start-screen {
+            height: 100vh; height: 100dvh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; z-index: 10; padding: 20px;
+        }
+
+        .hero-title-start {
+            font-family: 'Fredoka One', cursive; font-size: 3.5rem;
+            color: var(--orange-main);
+            text-shadow: 2px 2px 0px #000; margin-bottom: 15px;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to   { transform: scale(1.06); }
+        }
+
+        .subtitle-start {
+            font-size: 1.4rem; font-weight: 800; color: #000;
+            background: var(--yellow-accent); padding: 10px 25px; border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); margin-bottom: 30px;
+        }
+
+        /* --- GIF SLOTS (local file -> animated emoji fallback) --- */
+        .gif-slot { display: flex; justify-content: center; margin: 15px auto; }
+
+        .fun-gif {
+            height: auto; border-radius: 15px; max-width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        .emoji-gif {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 22px; border-radius: 22px;
+            background: rgba(255, 152, 0, 0.15);
+            border: 2px dashed rgba(255, 215, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            line-height: 1.1; letter-spacing: 6px;
+            animation: emojiDance 0.7s ease-in-out infinite alternate;
+        }
+        .emoji-gif.round { border-radius: 50%; border-style: solid; padding: 18px; letter-spacing: 0; }
+
+        @keyframes emojiDance {
+            0%   { transform: translateY(0) rotate(-6deg) scale(1); }
+            100% { transform: translateY(-12px) rotate(6deg) scale(1.08); }
+        }
+
+        /* FIXED FLOATING BUTTON FOR MOBILE */
+        #runaway-btn {
+            padding: 18px 45px; font-size: 1.4rem; font-family: 'Fredoka One', cursive;
+            background: linear-gradient(45deg, #ff9800, #ff5722); color: white;
+            border: 4px solid #fff; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 152, 0, 0.5);
+            position: relative; /* pehli dodge par JS isse fixed bana deta hai */
+            z-index: 100;
+            touch-action: manipulation;
+            max-width: calc(100vw - 20px);
+        }
+
+        /* --- LOADER SCREEN --- */
+        #loader-screen {
+            display: none; height: 100vh; height: 100dvh; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: var(--dark-bg); color: var(--orange-main); padding: 20px;
+        }
+
+        .spinner {
+            width: 70px; height: 70px; border: 8px solid rgba(255,152,0,0.2);
+            border-top: 8px solid var(--orange-main); border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 25px;
+        }
+
+        #loader-text { font-family: 'Fredoka One', cursive; font-size: 2rem; max-width: 700px; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- MAIN PAGE --- */
+        #main-content {
+            display: none; padding: 40px 15px; max-width: 900px; margin: 0 auto;
+            animation: pageSlideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes pageSlideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-box {
+            text-align: center; background: var(--card-bg); padding: 40px 20px;
+            border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 3px solid var(--orange-main); margin-bottom: 40px;
+        }
+
+        .main-heading { font-family: 'Fredoka One', cursive; font-size: 3.2rem; color: var(--yellow-accent); margin: 0;}
+        .sub-heading { font-size: 1.4rem; font-weight: 800; color: #bbb; margin-top: 10px; }
+
+        .section-card {
+            background: var(--card-bg); border-radius: 25px; padding: 30px 25px;
+            margin-bottom: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-left: 8px solid var(--orange-main);
+        }
+
+        .section-card h2 { font-family: 'Fredoka One', cursive; color: var(--yellow-accent); font-size: 2rem; margin-top: 0; }
+        .section-card p { font-size: 1.25rem; line-height: 1.8; font-weight: 500; color: #e0e0e0; }
+
+        .shayari-box {
+            background: #111; border: 2px dashed var(--yellow-accent); padding: 20px;
+            border-radius: 15px; font-style: italic; font-size: 1.3rem; color: #fff;
+            text-align: center; line-height: 1.8; margin-top: 20px;
+        }
+
+        /* --- PHOTO REVEAL --- */
+        .photo-reveal-container {
+            background: var(--card-bg); padding: 20px 20px 30px 20px; border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center;
+            max-width: 450px; margin: 0 auto 40px auto;
+            border: 2px solid #444; transform: rotate(-2deg); transition: 0.3s;
+        }
+
+        .photo-reveal-container:hover { transform: rotate(0deg) scale(1.02); }
+
+        #reveal-img {
+            width: 100%; height: 450px; object-fit: cover; border-radius: 10px;
+            background: #222; transition: opacity 0.4s ease-in-out; border: 2px solid #555;
+        }
+
+        #reveal-text {
+            font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--yellow-accent);
+            margin-top: 20px; font-weight: 700; line-height: 1.2; transition: opacity 0.4s ease-in-out;
+        }
+
+        /* TIMER BUTTON STYLE */
+        .next-btn {
+            background: var(--orange-main); color: #000; border: none; padding: 15px 35px;
+            font-size: 1.3rem; font-family: 'Fredoka One', cursive; border-radius: 30px;
+            margin-top: 15px; transition: 0.2s; box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+            cursor: pointer;
+        }
+
+        .next-btn:hover { background: var(--yellow-accent); transform: translateY(-3px); }
+
+        /* Disabled Button Style */
+        .btn-disabled {
+            background: #555 !important;
+            color: #999 !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        /* --- FLOATING / MOVING DANCING MEME DURING TIMER --- */
+        .moving-meme {
+            display: none; /* Hidden by default, shown by JS during timer */
+            position: fixed;
+            top: 45%;
+            width: auto;
+            z-index: 900;
+            pointer-events: none; /* So it doesn't block clicks on photos */
+            animation: walkAcross 12s linear infinite;
+        }
+        .moving-meme .gif-slot { margin: 0; }
+
+        /* ANIMATION: Right to Left, then flip, then Left to Right */
+        @keyframes walkAcross {
+            0% { left: 110vw; transform: scaleX(1); }
+            45% { left: -200px; transform: scaleX(1); }
+            50% { left: -200px; transform: scaleX(-1); } /* Flip Image */
+            95% { left: 110vw; transform: scaleX(-1); }
+            100% { left: 110vw; transform: scaleX(1); }
+        }
+
+        /* --- MUSIC BUTTON --- */
+        #music-btn {
+            display: none; position: fixed; top: 14px; right: 14px; z-index: 950;
+            width: 50px; height: 50px; border-radius: 50%; border: 3px solid var(--orange-main);
+            background: rgba(26,26,26,0.9); color: #fff; font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        /* --- MODAL POPUP --- */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+            background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center;
+            align-items: center; padding: 20px; overflow-y: auto;
+        }
+
+        .modal-content {
+            background: #222; padding: 40px; border-radius: 25px; max-width: 500px;
+            text-align: center; border: 5px solid var(--orange-main);
+            color: white; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: auto;
+        }
+
+        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .footer-note { text-align: center; font-size: 1.3rem; font-weight: 800; color: #888; margin-top: 40px; padding-bottom: 30px;}
+
+        /* --- CONFETTI CANVAS --- */
+        #confetti-canvas {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 1500; display: none;
+        }
+
+        /* --- PARTY LIGHTS --- */
+        #main-content { position: relative; z-index: 2; }
+
+        #party-lights {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+            z-index: 0; pointer-events: none; overflow: hidden;
+            opacity: 0; transition: opacity 1.2s ease;
+        }
+        body.party-soft #party-lights { opacity: 0.45; }
+        body.party #party-lights { opacity: 1; }
+
+        #party-lights::before {
+            content: ''; position: absolute; left: -20%; right: -20%; bottom: -30%; height: 70%;
+            background: radial-gradient(ellipse at 50% 100%, rgba(255,152,0,0.5), rgba(255,0,128,0.28) 40%, transparent 70%);
+            animation: floorGlow 1s ease-in-out infinite alternate;
+        }
+
+        .beam {
+            position: absolute; top: -6vh; left: var(--x); width: 46vw; height: 120vh; margin-left: -23vw;
+            transform-origin: 50% 0; clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+            opacity: 0.55;
+            animation: beamSwing 4s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .b1 { --x: 12%; background: linear-gradient(to bottom, rgba(255,60,160,0.9), transparent 75%); animation-duration: 3.6s; }
+        .b2 { --x: 38%; background: linear-gradient(to bottom, rgba(60,200,255,0.9), transparent 75%); animation-duration: 4.4s; animation-delay: -1.5s; }
+        .b3 { --x: 64%; background: linear-gradient(to bottom, rgba(255,215,0,0.9), transparent 75%); animation-duration: 3.9s; animation-delay: -2.4s; }
+        .b4 { --x: 88%; background: linear-gradient(to bottom, rgba(140,90,255,0.9), transparent 75%); animation-duration: 4.8s; animation-delay: -0.8s; }
+
+        @keyframes beamSwing { from { transform: rotate(-32deg); } to { transform: rotate(32deg); } }
+        @keyframes floorGlow { from { opacity: 0.45; transform: scaleY(0.9); } to { opacity: 0.95; transform: scaleY(1.08); } }
+
+        /* party mode me cards thode transparent taaki peeche ki lights dikhein */
+        body.party .section-card, body.party .header-box { background: rgba(42,42,42,0.84); }
+        body.party .header-box { animation: boxBeat 1s ease-in-out infinite alternate; }
+        body.party .photo-reveal-container { animation: photoGlow 3s linear infinite; }
+
+        @keyframes boxBeat {
+            from { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 rgba(255,152,0,0); }
+            to   { box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 34px rgba(255,152,0,0.65); }
+        }
+        @keyframes photoGlow {
+            0%   { box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(255,152,0,0.55); }
+            33%  { box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(255,64,129,0.55); }
+            66%  { box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(3,169,244,0.55); }
+            100% { box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(255,152,0,0.55); }
+        }
+
+        /* --- SPRINKLES CANVAS (peeche girte rehte hain) --- */
+        #sprinkle-canvas {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+            pointer-events: none; z-index: 1;
+        }
+
+        /* --- BALLOONS --- */
+        .balloon {
+            position: fixed; bottom: -70px; z-index: 5; pointer-events: none;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+            animation: balloonRise 12s linear forwards;
+        }
+        @keyframes balloonRise {
+            0%   { transform: translate(0, 0) rotate(-6deg); }
+            25%  { transform: translate(18px, -28vh) rotate(6deg); }
+            50%  { transform: translate(-14px, -58vh) rotate(-6deg); }
+            75%  { transform: translate(16px, -88vh) rotate(6deg); }
+            100% { transform: translate(0, -125vh) rotate(0deg); }
+        }
+
+        /* --- SHAKE (screen hilna) --- */
+        @keyframes shakeT {
+            0%, 100% { translate: 0 0; }
+            15% { translate: -9px 2px; }
+            30% { translate: 8px -3px; }
+            45% { translate: -7px 3px; }
+            60% { translate: 6px -2px; }
+            75% { translate: -3px 1px; }
+        }
+        .shaking { animation: shakeT 0.55s ease-in-out !important; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .beam, #party-lights::before, .balloon, .emoji-gif,
+            body.party .header-box, body.party .photo-reveal-container { animation: none !important; }
+        }
+
+        video.fun-gif { background: #000; object-fit: cover; }
+        .modal .fun-gif { border: 3px solid var(--orange-main); }
+
+        @media (max-width: 480px) {
+            .hero-title-start { font-size: 2.6rem; }
+            .main-heading { font-size: 2.4rem; }
+            #reveal-img { height: 380px; }
+            .modal-content { padding: 28px 20px; }
+        }
+    </style>
+</head>
+<body class="party-soft">
+
+    <!-- AUDIO PLAYER (HIDDEN) -->
+    <audio id="bg-music" src="song.mp3" loop></audio>
+    <button id="music-btn" aria-label="Music on/off">🔊</button>
+    <canvas id="confetti-canvas"></canvas>
+    <canvas id="sprinkle-canvas"></canvas>
+    <div id="party-lights" aria-hidden="true">
+        <div class="beam b1"></div>
+        <div class="beam b2"></div>
+        <div class="beam b3"></div>
+        <div class="beam b4"></div>
+    </div>
+
+    <!--
+        VIDEO CLIPS (Index.html ke saath usi folder me rakhiye):
+          5.mp4 -> start screen (badi aankhon wali billi, "pakad ke dikha" wala dare)
+          4.mp4 -> "Sachai ki Baatein" card (akeli khadi billi, "akela" wali lines ke saath)
+          1.mp4 -> "Weight aur Bhaichara" card (smirk karta corgi)
+          2.mp4 -> timer ke time screen par ghoomne wala daant dikhata dog (bhaiyo ki shubhkamna)
+          3.mp4 -> final certificate (DJ billi, party)
+        Koi clip na chale/na mile to uski jagah animated emoji apne aap dikhega.
+    -->
+
+    <!-- MOVING MEME (Appears only during 30s timer) -->
+    <div id="moving-meme" class="moving-meme">
+        <div class="gif-slot" data-video="2.mp4" data-emoji="🐕🕺" data-size="120" data-alt="Daant dikhata dog"></div>
+    </div>
+
+    <!-- SCREEN 1: DODGING BUTTON -->
+    <div id="start-screen">
+        <div class="hero-title-start">Ram Ram Varun Bhai! 💪</div>
+        <div class="subtitle-start">Bhai ke birthday pe kuch khaas banaya sai...</div>
+
+        <div class="gif-slot" data-video="5.mp4" data-emoji="🐱👀" data-size="170" data-alt="Funny Cat"></div>
+
+        <p style="font-weight: bold; color: #ccc; font-size: 1.3rem;">Dum sai toh pehle is button ne pakad ke dikha! 😎</p>
+        <div style="min-height: 100px; display: flex; align-items: center; justify-content: center;">
+            <button id="runaway-btn">Khul Ja Bhai 🚀</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: FAKE LOADER -->
+    <div id="loader-screen">
+        <div class="spinner"></div>
+        <p id="loader-text">System Load ho rha sai...</p>
+    </div>
+
+    <!-- SCREEN 3: MAIN PAGE -->
+    <div id="main-content">
+
+        <div class="header-box">
+            <h1 class="main-heading">Happy Birthday Varun! 🎉</h1>
+            <div class="sub-heading">Bhari Sharir aur Halka Dil aala Apna Bhai 💯</div>
+        </div>
+
+        <div class="section-card">
+            <h2>🔥 Sachai ki Baatein</h2>
+            <div class="shayari-box">
+                "Sun mere bhai, ek baat kahu sachi,<br>
+                Waise toh bhari sharir tera, par dil ka tu ekdum halka sai! <br><br>
+                Dikhawa kare sai tu ki kitna khush maanas sai tu,<br>
+                Par manne bera sai bhai, andar te tu kitna akela sai.<br><br>
+                In duniya aalya ne bhool ja, apni mauj mein khush rehya kar,<br>
+                Akele aaya tha is duniya mein, apna khud ka sahara baneya kar!"
+            </div>
+            <p style="text-align: center; margin-top: 20px;"><b>Happy Birthday Mere Bhai! Hamesha khush reh!</b></p>
+            <div class="gif-slot" data-video="4.mp4" data-emoji="🐈" data-size="170" data-alt="Akeli khadi billi"></div>
+        </div>
+
+        <div class="section-card">
+            <h2>🏋️ Weight aur Bhaichara</h2>
+            <p>
+                Bhai chahe wazan kitna bhi badh jaye, par teri dosti aur tera dil hamesha saaf hi raha sai. Thoda bohot gym-vym jaya kar, baaki toh apna bhai ekdum hero laage sai! Aise hi mast reh, dimaag mat lagaya kar fukro ki baato mein. Tu apna sher sai! 🦁
+            </p>
+            <div class="gif-slot" data-video="1.mp4" data-emoji="🐶😏" data-size="190" data-alt="Smirk karta corgi"></div>
+        </div>
+
+        <!-- PHOTO REVEAL SECTION -->
+        <h2 style="text-align: center; font-family: 'Fredoka One', cursive; color: var(--orange-main); font-size: 2.6rem; margin-top: 50px;">📸 Bhai ki Photo Gallery</h2>
+        <p style="text-align: center; font-weight: bold; font-size: 1.2rem; color: #aaa; margin-bottom: 30px;">Photos dekh aur gaana enjoy kar! 👇</p>
+
+        <div class="photo-reveal-container">
+            <img id="reveal-img" src="1.jpg" alt="Varun Bhai">
+            <p id="reveal-text">Saare bhaiyo ki taraf se Janamdin ki bohot bohot shubhkamnaye! 🍻</p>
+
+            <!-- BUTTON WITH 30s TIMER LOGIC -->
+            <button class="next-btn btn-disabled" id="next-btn" onclick="showNextPhoto()">Maje le gaane ke... (30s)</button>
+        </div>
+
+        <div class="footer-note">
+            Khush rehya kar, Mast rehya kar & Happy Birthday Bhai! 🍻 <br>
+            - Tera Bhai, Archit
+        </div>
+
+    </div>
+
+    <!-- FINAL SURPRISE MODAL -->
+    <div class="modal" id="surprise-modal">
+        <div class="modal-content">
+            <h2 style="color: var(--yellow-accent); font-family: 'Fredoka One', cursive; font-size: 2.2rem;">🏆 CERTIFICATE OF BHAICHARA 🏆</h2>
+
+            <div class="gif-slot" data-video="3.mp4" data-emoji="🥳" data-size="230" data-alt="DJ Cat"></div>
+
+            <p style="font-size: 1.2rem; font-weight: bold; margin-top: 10px;">Awarded To: <br><span style="font-size: 1.8rem; color: var(--orange-main);">Varun Bhai</span></p>
+            <div style="font-size: 5rem; margin: 15px 0;">🤝</div>
+            <p style="font-size: 1.15rem; color: #ccc; line-height: 1.6;">
+                For winning the official title of:<br>
+                <b>"Sabse Bhari Sharir par Sabse Halka aur Saaf Dil aala Dost!"</b><br><br>
+                Party toh banti sai bhai! 🎂🔥
+            </p>
+            <button onclick="closeGift()" style="background: var(--orange-main); color: #000; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 1.1rem;">Chalo done sai! 😂</button>
+        </div>
+    </div>
+
+    <script>
+        /* --- MEDIA LOADER: mp4 clip (muted, loop) -> na chale to animated emoji --- */
+        function buildGif(slot) {
+            const videoSrc = slot.dataset.video;
+            const emoji = slot.dataset.emoji || '🎉';
+            const size = parseInt(slot.dataset.size || '150', 10);
+
+            function showEmoji() {
+                slot.innerHTML = '';
+                const d = document.createElement('div');
+                d.className = 'emoji-gif';
+                d.style.fontSize = Math.round(size * 0.5) + 'px';
+                d.textContent = emoji;
+                slot.appendChild(d);
+            }
+
+            if (!videoSrc) { showEmoji(); return; }
+
+            const v = document.createElement('video');
+            v.className = 'fun-gif';
+            v.style.width = size + 'px';
+            v.muted = true;
+            v.defaultMuted = true;
+            v.setAttribute('muted', '');
+            v.loop = true;
+            v.autoplay = true;
+            v.playsInline = true;
+            v.setAttribute('playsinline', '');
+            v.setAttribute('webkit-playsinline', '');
+            v.preload = 'auto';
+            v.disablePictureInPicture = true;
+            v.setAttribute('aria-label', slot.dataset.alt || '');
+
+            v.addEventListener('error', showEmoji);
+            // 5 second me kuch load na ho to emoji dikha do
+            setTimeout(function () {
+                if (v.readyState === 0 && v.parentNode === slot) showEmoji();
+            }, 5000);
+
+            slot.innerHTML = '';
+            slot.appendChild(v);
+            v.src = videoSrc;
+            v.play().catch(function () {});
+        }
+
+        // Hidden section khulte hi uske videos dobara play kara do
+        function playVideosIn(el) {
+            el.querySelectorAll('video').forEach(function (v) {
+                v.play().catch(function () {});
+            });
+        }
+
+        document.querySelectorAll('.gif-slot').forEach(buildGif);
+
+        /* --- ELEMENTS --- */
+        const btn = document.getElementById('runaway-btn');
+        const startScreen = document.getElementById('start-screen');
+        const loaderScreen = document.getElementById('loader-screen');
+        const mainContent = document.getElementById('main-content');
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const movingMeme = document.getElementById('moving-meme');
+
+        let dodgeCount = 0;
+        const maxDodges = 6;
+        let isTimerActive = false;
+        let activeTimer = null;
+
+        const teaseTexts = [
+            "Arey bhai thoda tej haath chala! 😜",
+            "Gym jaya kar, mouse bhi na pakda ja raha! 💪",
+            "Bhari sharir ka asar ungliyo pe bhi aa gaya ke? 🐢",
+            "Are Archit ke gift tak aana itna aasan na sai! 😎",
+            "Chal bhai, aakhri mauka de rha hu... 😂",
+            "Le dabale ab button! 🤝"
+        ];
+
+        /* --- RUNAWAY BUTTON --- */
+        function moveButton() {
+            if (dodgeCount < maxDodges) {
+                btn.style.position = 'fixed';
+                btn.style.transform = 'none';
+                const maxX = window.innerWidth - btn.offsetWidth - 20;
+                const maxY = window.innerHeight - btn.offsetHeight - 20;
+
+                const randomX = Math.max(10, Math.random() * maxX);
+                const randomY = Math.max(10, Math.random() * maxY);
+
+                btn.style.left = randomX + 'px';
+                btn.style.top = randomY + 'px';
+
+                btn.innerText = teaseTexts[dodgeCount];
+                buzz(30);
+                dodgeCount++;
+            }
+        }
+
+        btn.addEventListener('mouseover', moveButton);
+        btn.addEventListener('touchstart', function (e) {
+            if (dodgeCount < maxDodges) {
+                e.preventDefault();
+                moveButton();
+            }
+        }, { passive: false });
+
+        btn.addEventListener('click', function () {
+            if (dodgeCount >= maxDodges) {
+
+                // --- PLAY MUSIC HERE ---
+                bgMusic.play().catch(function (error) {
+                    console.log("Music autoplay blocked", error);
+                });
+                musicBtn.style.display = 'block';
+                buzz([80, 40, 80, 40, 160]);
+                burst(window.innerWidth / 2, window.innerHeight / 2, 40, 7);
+
+                startScreen.style.display = 'none';
+                loaderScreen.style.display = 'flex';
+
+                const loadTexts = [
+                    "Checking Wazan... Error: Machine tut gayi! 😜",
+                    "Scanning Bhaichara Level... 🤝",
+                    "Checking Dil Ki Safai... 100% Pure! ❤️",
+                    "Loading Desi Swag... 🔥",
+                    "Access Granted Bhai! Khul rha sai... 😎"
+                ];
+
+                let textIndex = 0;
+                const loadEl = document.getElementById('loader-text');
+                loadEl.innerText = loadTexts[0];
+
+                const loadInterval = setInterval(function () {
+                    textIndex++;
+                    if (textIndex < loadTexts.length) {
+                        loadEl.innerText = loadTexts[textIndex];
+                        buzz(25);
+                    } else {
+                        clearInterval(loadInterval);
+                        loaderScreen.style.display = 'none';
+                        mainContent.style.display = 'block';
+                        window.scrollTo(0, 0);
+                        playVideosIn(mainContent);
+                        startParty();
+
+                        // Start the 30-second timer when main content loads
+                        startTimer();
+                    }
+                }, 1500);
+            }
+        });
+
+        /* --- MUSIC ON/OFF --- */
+        musicBtn.addEventListener('click', function () {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(function () {});
+                musicBtn.textContent = '🔊';
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            }
+        });
+
+        /* --- 30 SECONDS TIMER & MOVING MEME LOGIC --- */
+        function startTimer() {
+            if (activeTimer) clearInterval(activeTimer);
+
+            isTimerActive = true;
+            nextBtn.classList.add("btn-disabled");
+            nextBtn.style.cursor = "not-allowed";
+            nextBtn.style.background = "";
+            nextBtn.style.color = "";
+
+            // SHOW MOVING DANCING MEME ACROSS SCREEN
+            movingMeme.style.display = 'block';
+            playVideosIn(movingMeme);
+
+            let timeLeft = 30; // SET TO 30 SECONDS
+
+            nextBtn.innerText = "Ruk ja bhai gaana sun le... (" + timeLeft + "s)";
+
+            activeTimer = setInterval(function () {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    nextBtn.innerText = "Ruk ja bhai gaana sun le... (" + timeLeft + "s)";
+                } else {
+                    clearInterval(activeTimer);
+                    activeTimer = null;
+                    isTimerActive = false;
+
+                    // HIDE MOVING MEME WHEN TIMER STOPS
+                    movingMeme.style.display = 'none';
+                    buzz([40, 40, 40]);
+
+                    nextBtn.classList.remove("btn-disabled");
+                    nextBtn.style.cursor = "pointer";
+
+                    if (currentIndex === photos.length - 1) {
+                        nextBtn.innerText = "Final Surprise Dekh Bhai 🎁";
+                        nextBtn.style.background = "linear-gradient(45deg, #ff9800, #ff5722)";
+                        nextBtn.style.color = "#fff";
+                    } else {
+                        nextBtn.innerText = "Le Bhai, Next Dekh! 📸";
+                    }
+                }
+            }, 1000);
+        }
+
+        /* --- PHOTO REVEAL LOGIC --- */
+        const photos = [
+            { src: "1.jpg", text: "Saare bhaiyo ki taraf se Janamdin ki bohot bohot shubhkamnaye! 🍻" },
+            { src: "2.jpg", text: "Bhaichara on top! Apni jodi ekdum mast sai bhai. 🤝" },
+            { src: "3.png", text: "Bhai hass bhi liya kar, ke soche jaa hai? Janmdin mubarak ho! 🎉" }
+        ];
+
+        let currentIndex = 0;
+        const imgEl = document.getElementById('reveal-img');
+        const textEl = document.getElementById('reveal-text');
+        const modal = document.getElementById('surprise-modal');
+
+        let errorTryCount = 0;
+        const fallbackExtensions = ['.jpg', '.png', '.jpeg', '.JPG', '.PNG', '.jpeg'.toUpperCase()];
+
+        const photoPlaceholder = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450">' +
+            '<rect width="100%" height="100%" fill="#222"/>' +
+            '<text x="50%" y="46%" font-size="90" text-anchor="middle">📸</text>' +
+            '<text x="50%" y="62%" font-size="26" fill="#ffd700" text-anchor="middle" font-family="sans-serif">Photo yahan aayegi</text>' +
+            '</svg>'
+        );
+
+        function fixBrokenImage(img) {
+            const baseName = photos[currentIndex].src.split('.')[0];
+            if (errorTryCount < fallbackExtensions.length) {
+                img.src = baseName + fallbackExtensions[errorTryCount];
+                errorTryCount++;
+            } else {
+                img.onerror = null;
+                img.src = photoPlaceholder;
+            }
+        }
+
+        imgEl.onerror = function () { fixBrokenImage(imgEl); };
+        if (imgEl.complete && imgEl.naturalWidth === 0) { fixBrokenImage(imgEl); }
+
+        function showNextPhoto() {
+            if (isTimerActive) return;
+
+            if (currentIndex === photos.length - 1) {
+                modal.style.display = 'flex';
+                playVideosIn(modal);
+                launchConfetti();
+                return;
+            }
+
+            imgEl.style.opacity = 0;
+            textEl.style.opacity = 0;
+
+            setTimeout(function () {
+                currentIndex++;
+                errorTryCount = 0;
+
+                imgEl.onerror = function () { fixBrokenImage(imgEl); };
+                imgEl.src = photos[currentIndex].src;
+                textEl.innerText = photos[currentIndex].text;
+                cannons();
+                buzz([60, 30, 60]);
+                shake(document.querySelector('.photo-reveal-container'));
+
+                imgEl.style.opacity = 1;
+                textEl.style.opacity = 1;
+
+                // Start timer again for the new photo
+                startTimer();
+
+            }, 400);
+        }
+
+        function closeGift() {
+            modal.style.display = 'none';
+        }
+
+        /* =========================================================
+           PARTY EFFECTS: confetti, sprinkles, balloons, shake, vibration
+           ========================================================= */
+        const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        const FX_COLORS = ['#ff9800', '#ffd700', '#ff5722', '#ff4081', '#4caf50', '#03a9f4', '#b388ff', '#ffffff'];
+
+        function pickColor() { return FX_COLORS[Math.floor(Math.random() * FX_COLORS.length)]; }
+
+        /* Vibration: Android Chrome par chalta hai, iPhone par support nahi hota */
+        function buzz(pattern) {
+            if (reduceMotion) return;
+            try { if (navigator.vibrate) navigator.vibrate(pattern); } catch (e) {}
+        }
+
+        /* Screen hilana (element par .shaking class thodi der ke liye) */
+        function shake(el) {
+            if (reduceMotion || !el) return;
+            el.classList.remove('shaking');
+            void el.offsetWidth;
+            el.classList.add('shaking');
+            setTimeout(function () { el.classList.remove('shaking'); }, 650);
+        }
+
+        /* --- Front canvas: confetti, party poppers, tap sparkles --- */
+        const fxCanvas = document.getElementById('confetti-canvas');
+        const fxCtx = fxCanvas.getContext('2d');
+        let fxParts = [];
+        let fxRunning = false;
+
+        function fxResize() {
+            fxCanvas.width = window.innerWidth;
+            fxCanvas.height = window.innerHeight;
+        }
+
+        function fxAdd(p) {
+            if (reduceMotion || fxParts.length > 700) return;
+            p.age = 0;
+            fxParts.push(p);
+            if (!fxRunning) {
+                fxRunning = true;
+                fxCanvas.style.display = 'block';
+                requestAnimationFrame(fxLoop);
+            }
+        }
+
+        function fxLoop() {
+            fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+            for (let i = fxParts.length - 1; i >= 0; i--) {
+                const p = fxParts[i];
+                p.vx *= p.drag;
+                p.vy = p.vy * p.drag + p.g;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rot += p.vr;
+                p.age++;
+                if (p.age > p.life || p.y > fxCanvas.height + 30) {
+                    fxParts.splice(i, 1);
+                    continue;
+                }
+                fxCtx.save();
+                fxCtx.globalAlpha = Math.min(1, (p.life - p.age) / 20);
+                fxCtx.translate(p.x, p.y);
+                fxCtx.rotate(p.rot);
+                fxCtx.fillStyle = p.c;
+                if (p.dot) {
+                    fxCtx.beginPath();
+                    fxCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+                    fxCtx.fill();
+                } else {
+                    fxCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                }
+                fxCtx.restore();
+            }
+            if (fxParts.length) {
+                requestAnimationFrame(fxLoop);
+            } else {
+                fxRunning = false;
+                fxCanvas.style.display = 'none';
+            }
+        }
+
+        /* Chhota dhamaka (tap karne par / button pakde jaane par) */
+        function burst(x, y, n, power) {
+            for (let i = 0; i < n; i++) {
+                const a = Math.random() * Math.PI * 2;
+                const sp = power * (0.4 + Math.random() * 0.8);
+                fxAdd({
+                    x: x, y: y,
+                    vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - power * 0.25,
+                    g: 0.17, drag: 0.985,
+                    w: 4 + Math.random() * 5, h: 6 + Math.random() * 8,
+                    rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.4,
+                    c: pickColor(), dot: Math.random() < 0.35,
+                    life: 55 + Math.random() * 35
+                });
+            }
+        }
+
+        /* Party poppers: neeche ke dono kone se confetti upar ki taraf */
+        function cannons() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            for (let side = 0; side < 2; side++) {
+                for (let i = 0; i < 45; i++) {
+                    const deg = 50 + Math.random() * 30;
+                    const a = side === 0 ? -deg * Math.PI / 180 : -(180 - deg) * Math.PI / 180;
+                    const sp = 11 + Math.random() * 9;
+                    fxAdd({
+                        x: side === 0 ? 0 : w, y: h,
+                        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+                        g: 0.28, drag: 0.99,
+                        w: 6 + Math.random() * 6, h: 8 + Math.random() * 8,
+                        rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.5,
+                        c: pickColor(), dot: Math.random() < 0.25,
+                        life: 100 + Math.random() * 50
+                    });
+                }
+            }
+        }
+
+        /* Upar se confetti ki barish */
+        function confettiRain(ms) {
+            const end = performance.now() + ms;
+            const iv = setInterval(function () {
+                if (performance.now() > end) { clearInterval(iv); return; }
+                for (let i = 0; i < 5; i++) {
+                    fxAdd({
+                        x: Math.random() * window.innerWidth, y: -12,
+                        vx: (Math.random() - 0.5) * 2, vy: 2 + Math.random() * 3,
+                        g: 0.02, drag: 1,
+                        w: 6 + Math.random() * 8, h: 8 + Math.random() * 10,
+                        rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.3,
+                        c: pickColor(), dot: Math.random() < 0.2,
+                        life: 330
+                    });
+                }
+            }, 70);
+        }
+
+        /* --- Back canvas: sprinkles jo hamesha peeche girte rehte hain --- */
+        const spCanvas = document.getElementById('sprinkle-canvas');
+        const spCtx = spCanvas.getContext('2d');
+        const sprinkles = [];
+
+        function spResize() {
+            spCanvas.width = window.innerWidth;
+            spCanvas.height = window.innerHeight;
+        }
+
+        function newSprinkle(initial) {
+            return {
+                x: Math.random() * spCanvas.width,
+                y: initial ? Math.random() * spCanvas.height : -20,
+                len: 8 + Math.random() * 10,
+                th: 3 + Math.random() * 2,
+                vy: 0.6 + Math.random() * 1.2,
+                sway: Math.random() * Math.PI * 2,
+                swaySpeed: 0.01 + Math.random() * 0.02,
+                rot: Math.random() * Math.PI,
+                vr: (Math.random() - 0.5) * 0.05,
+                c: pickColor()
+            };
+        }
+
+        function spLoop() {
+            spCtx.clearRect(0, 0, spCanvas.width, spCanvas.height);
+            spCtx.globalAlpha = document.body.classList.contains('party') ? 0.9 : 0.55;
+            spCtx.lineCap = 'round';
+            for (let i = 0; i < sprinkles.length; i++) {
+                const sp = sprinkles[i];
+                sp.y += sp.vy;
+                sp.sway += sp.swaySpeed;
+                sp.x += Math.sin(sp.sway) * 0.5;
+                sp.rot += sp.vr;
+                if (sp.y > spCanvas.height + 20) {
+                    sprinkles[i] = newSprinkle(false);
+                    continue;
+                }
+                spCtx.save();
+                spCtx.translate(sp.x, sp.y);
+                spCtx.rotate(sp.rot);
+                spCtx.strokeStyle = sp.c;
+                spCtx.lineWidth = sp.th;
+                spCtx.beginPath();
+                spCtx.moveTo(-sp.len / 2, 0);
+                spCtx.lineTo(sp.len / 2, 0);
+                spCtx.stroke();
+                spCtx.restore();
+            }
+            requestAnimationFrame(spLoop);
+        }
+
+        function startAmbient() {
+            if (reduceMotion) return;
+            const count = Math.min(70, Math.round(window.innerWidth / 8));
+            for (let i = 0; i < count; i++) sprinkles.push(newSprinkle(true));
+            requestAnimationFrame(spLoop);
+        }
+
+        /* --- Balloons / emoji upar udte hue --- */
+        let balloonTimer = null;
+
+        function startBalloons() {
+            if (reduceMotion || balloonTimer) return;
+            const list = ['🎈', '🎈', '🎈', '🎉', '🎊', '🍻', '✨'];
+            balloonTimer = setInterval(function () {
+                if (document.hidden || document.querySelectorAll('.balloon').length >= 5) return;
+                const b = document.createElement('div');
+                b.className = 'balloon';
+                b.textContent = list[Math.floor(Math.random() * list.length)];
+                b.style.left = (3 + Math.random() * 88) + '%';
+                b.style.fontSize = (28 + Math.random() * 26) + 'px';
+                b.style.animationDuration = (9 + Math.random() * 6) + 's';
+                b.addEventListener('animationend', function () { b.remove(); });
+                document.body.appendChild(b);
+            }, 1100);
+        }
+
+        /* Main page khulte hi: lights full, party poppers, vibration, balloons */
+        function startParty() {
+            document.body.classList.remove('party-soft');
+            document.body.classList.add('party');
+            startBalloons();
+            cannons();
+            buzz([100, 50, 100, 50, 200]);
+        }
+
+        /* Final surprise ka bada celebration */
+        function launchConfetti() {
+            cannons();
+            confettiRain(4500);
+            buzz([120, 60, 120, 60, 120, 60, 400]);
+            shake(modal);
+        }
+
+        /* Kahin bhi tap karo to sparkles + halka buzz */
+        document.addEventListener('pointerdown', function (e) {
+            burst(e.clientX, e.clientY, 14, 4.5);
+            buzz(12);
+        }, { passive: true });
+
+        window.addEventListener('resize', function () { fxResize(); spResize(); });
+        fxResize();
+        spResize();
+        startAmbient();
+    </script>
+</body>
+</html>
